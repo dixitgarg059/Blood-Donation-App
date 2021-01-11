@@ -1,2 +1,3 @@
-# BloodDonateApp
-This app is for Blood Donation app which is build by PhoneGap and FireBase backend
+# BTP-1
+
+This app is modified version of the app https://github.com/ilyasmohd/BloodDonateApp
