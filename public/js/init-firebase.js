@@ -52,8 +52,7 @@ function FireBaseSearchDonors(donor) {
                                         </div>
                                         <div class="col-md-5 py-1">
                                            <!--<b>Email: </b>${doc.data().Email} -->
-                                            <b>Contact No: </b>${doc.data().ContactNo}
-                                            <br>
+                                            < <b>Contact No: </b><a href="tel:1800123456"> ${doc.data().ContactNo}</a>br>
                                             <b>Location: </b>${ state_arr[doc.data().State]}, ${city_arr[doc.data().State].split("|")[doc.data().City] }
                                         </div>
                                         <div class="col-md-3 py-1">
