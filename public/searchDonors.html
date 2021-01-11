@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Donate Blood to Donate Life</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Donate Blood to Donate Life">
+    <meta name="keywords" content="Donate, Donate Blood, Donate Life">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link type="text/css" rel="stylesheet" href="./css/firebase-ui.css" />
+    <link type="text/css" rel="stylesheet" href="./css/font-awesome.min.css" />
+</head>
+
+
+<body>
+    <div id="wrapper">
+        <div class="overlay"></div>
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <div class="sidebar-header">
+                    <div class="sidebar-brand">
+                        <a href="#"><i class="fa fa-handshake-o"></i> AIPIF</a>
+                    </div>
+                </div>
+                <li>
+                    <a href="./searchDonors.html">
+                        <i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="./aboutUS.html">
+                        <i class="fa fa-info"></i> About</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-search"></i> Search Blood Donors</a>
+                </li>
+                <li>
+                    <a href="./donateBlood.html">
+                        <i class="fa fa-tint"></i> Donate Blood</a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+
+            <div class="container mt-2">
+
+                <nav class="navbar navbar-expand-xl">
+                    <a class="navbar-brand" style="color: #000;" href="./searchDonors.html">
+                        <img style="width: 100px; height: 100px;" src="./assets/logo.png" alt="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon fa fa-bars"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item" class="nav-item ">
+                                <a class="nav-link text-dark" href="./searchDonors.html">
+                                    <i class="fa fa-home"></i> Home</a>
+                            </li>
+                            <li class="nav-item" class="nav-item ">
+                                <a class="nav-link text-dark" href="./aboutUS.html">
+                                    <i class="fa fa-info"></i> About Us</a>
+                            </li>
+                            <li class="nav-item" class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class="fa fa-search"></i> Search Blood Donors</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="./donateBlood.html">
+                                    <i class="fa fa-tint"></i> Donate Blood</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid pt-3">
+                    <div class="col loading text-center" id="searchFormLoading" style="display: none;">
+                        <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
+                    </div>
+                    <h3 class="white" style="color: #fff">Search Donors</h3>
+                    <form id="SearchDonors">
+                        <div class=" row">
+                            <div class="col-md-3 form-group">
+                                <!-- <label for="states">Select State:</label> -->
+                                <select id="states" name="states" class="form-control" required></select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <!-- <label for="cities">Select City:</label> -->
+                                <select id="cities" name="cities" class="form-control" required></select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <!-- <label for="bloodGroup">Select Blood Group:</label> -->
+                                <select id="bloodGroup" name="bloodGroup" class="form-control" required>
+                                    <option value="Select">--Select--</option>
+                                    <option value="A+">A+</option>
+                                    <option value="B+">B+</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="O+">O+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="mb-5 pb-4">
+                        <table id="DonorsTable" style="display: none;">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                        <div id='noDonorsFound' style="text-align: center;
+                        font-size: 29px;
+                        font-weight: bold;padding: 10px;color: red;
+                        background: white;
+                        display: none;">
+                            <i class="fa fa-warning"></i> No Donors Found !!!!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <br>
+    </br>
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container-fluid text-center">
+            <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
+        </div>
+    </footer>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/cities.js"></script>
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="./js/firebase-app.js"></script>
+<script src="./js/firebase-firestore.js"></script>
+<script src="./js/firebaseui.js"></script>
+<script src="./js/init-firebase.js"></script>
+<script src="./js/searchDonor.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/tether.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+            isClosed = false;
+
+        trigger.click(function () {
+            hamburger_cross();
+        });
+
+        function hamburger_cross() {
+
+            if (isClosed == true) {
+                overlay.hide();
+                trigger.removeClass('is-open');
+                trigger.addClass('is-closed');
+                isClosed = false;
+            } else {
+                overlay.show();
+                trigger.removeClass('is-closed');
+                trigger.addClass('is-open');
+                isClosed = true;
+            }
+        }
+
+        $('[data-toggle="offcanvas"]').click(function () {
+            $('#wrapper').toggleClass('toggled');
+        });
+    });
+</script>
+
+</html>
