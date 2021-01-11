@@ -576,6 +576,11 @@ html {
     width: 70% !important;
 }
 
+#DonorsTable2 td {
+    width: 70% !important;
+}
+
+
 .blood-style {
     background: #fe616a;
     border: 1px solid indianred;

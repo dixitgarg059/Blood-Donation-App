@@ -124,10 +124,23 @@
                         </div>
                     </form>
                     <div class="mb-5 pb-4">
+                        <h5 class="white" style="color: #fff" id="dk1">
+                            Greater than 5 months or never donated
+                        </h5>
                         <table id="DonorsTable" style="display: none;">
                             <tbody>
                                 <tr></tr>
                             </tbody>
+                        </table>
+
+                        <h5 class="white" style="color: #fff" id="dk2">
+                            Less than 5 months
+                        </h5>
+                        
+                        <table id="DonorsTable2" style="display: none;">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>    
                         </table>
                         <div id='noDonorsFound' style="text-align: center;
                         font-size: 29px;
@@ -163,7 +176,10 @@
 <script src="./js/popper.min.js"></script>
 <script src="./js/tether.min.js"></script>
 <script>
+    $("#dk1").hide();
+    $("#dk2").hide();
     $(document).ready(function () {
+
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;

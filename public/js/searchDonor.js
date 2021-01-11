@@ -8,6 +8,8 @@ $(document).ready(function () {
         $('.WebUser').css('display', 'block');
         $('.MobileUser').css('display', 'none');
     }
+    $("#dk1").hide()
+    $("#dk2").hide()
     class SearchDonor {
         constructor() {
             this.donorDetails = {
@@ -63,6 +65,8 @@ $(document).ready(function () {
         //console.log(searchDonorObj);
         // #AvailableDonors
         //SearchDonors(searchDonorObj);
+        $("#dk1").hide();
+        $("#dk2").hide();
         FireBaseSearchDonors(searchDonorObj);
     });
 });
