@@ -55,7 +55,7 @@ $(document).ready(function () {
         // }
     });
 
-    $('#registerDonor').on('submit', function (e) {
+        $('#registerDonor').on('submit', function (e) {
         e.preventDefault();
         //var emailRegex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
