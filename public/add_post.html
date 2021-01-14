@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Donate Blood to Donate Life</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Donate Blood to Donate Life">
+    <meta name="keywords" content="Donate, Donate Blood, Donate Life">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link type="text/css" rel="stylesheet" href="./css/firebase-ui.css" />
+    <link type="text/css" rel="stylesheet" href="./css/font-awesome.min.css" />
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/cities.js"></script>
+    <script src="./js/firebase-app.js"></script>
+    <script src="./js/firebase-firestore.js"></script>
+    <script src="./js/firebase-auth.js"></script>
+    <script src="./js/firebaseui.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/init-firebase2.js"></script>
+
+
+
+    <!-- <script src="./js/jquery.js"></script> -->
+    <!-- <script src="./js/bootstrap.js"></script> -->
+    <!-- <script src="./js/cities.js"></script> -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <!-- <script src="./js/firebase-app.js"></script> -->
+    <!-- <script src="./js/firebase-firestore.js"></script> -->
+    <!-- <script src="./js/firebaseui.js"></script> -->
+    <!-- <script src="./js/init-firebase.js"></script> -->
+    <script src="./js/searchDonor.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/tether.min.js"></script>
+
+
+
+
+    <!-- <script src="./js/init_login.js"></script> -->
+    <!-- <script src="./js/registerDonor.js"></script> -->
+    <style>
+        #snackbarName,
+        #snackbarbG,
+        #snackbarMb,
+        #snackbarCity,
+        #snackbarState,
+        #snackbarEi,
+        #snackbarDonateDetails,
+        #unavailableError {
+            display: none;
+            color: red;
+            /* text-align: center; */
+            border-radius: 2px;
+            font-size: 12px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        input[type=text],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        /* Style the label to display next to the inputs */
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        /* Style the submit button */
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Style the container */
+        .container {
+            border-radius: 5px;
+            /* background-color: #f2f2f2; */
+            padding: 20px;
+        }
+
+        /* Floating column for labels: 25% width */
+        .col-25 {
+            float: left;
+            width: 25%;
+            /* background-color: #f2f2f2; */
+
+            margin-top: 6px;
+        }
+
+        /* Floating column for inputs: 75% width */
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+
+            .col-25,
+            .col-75,
+            input[type=submit] {
+                width: 100%;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="overlay"></div>
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <div class="sidebar-header">
+                    <div class="sidebar-brand">
+                        <a href="#"><i class="fa fa-handshake-o"></i> AIPIF</a>
+                    </div>
+                </div>
+                <li>
+                    <a href="./searchDonors.html">
+                        <i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="./aboutUS.html">
+                        <i class="fa fa-info"></i> About</a>
+                </li>
+                <li>
+                    <a href="./searchDonors.html">
+                        <i class="fa fa-search"></i> Search Blood Donors</a>
+                </li>
+                <li>
+                    <a href="./donateBlood.html">
+                        <i class="fa fa-tint"></i> Donate Blood</a>
+                </li>
+                <li>
+                    <a href="./add_post.html">
+                        <i class="fa fa-tint"></i>Admin</a>
+                </li>
+
+
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+
+            <div class="container mt-2">
+                <nav class="navbar navbar-expand-xl">
+                    <a class="navbar-brand" style="color: #000;" href="./searchDonors.html">
+                        <img style="width: 120px; height: 120px;" src="./assets/logo.png" alt="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon fa fa-bars"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item" class="nav-item ">
+                                <a class="nav-link text-dark" href="./searchDonors.html">
+                                    <i class="fa fa-home"></i> Home</a>
+                            </li>
+                            <li class="nav-item" class="nav-item ">
+                                <a class="nav-link  text-dark " href="./aboutUS.html">
+                                    <i class="fa fa-info"></i> About Us</a>
+                            </li>
+                            <li class="nav-item" class="nav-item">
+                                <a class="nav-link text-dark " href="./searchDonors.html">
+                                    <i class="fa fa-search"></i> Search Blood Donors</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="./donateBlood.html">
+                                    <i class="fa fa-tint"></i> Donate Blood</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="./campaign.html">
+                                    <i class="fa fa-tint"></i>Activities</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="./add_post.html">
+                                    <i class="fa fa-tint"></i>Admin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container">
+                    <form id="blog-post">
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="fname">Title</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="title" name="title" placeholder="Your title">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="country">State</label>
+                            </div>
+
+
+
+                            <div class="col-75">
+                                <select id="states" name="states" class="form-control" required></select>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="country">City</label>
+                            </div>
+                            <div class="col-75">
+                                <select id="cities" name="cities" class="form-control" required></select>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="subject">Content</label>
+                            </div>
+                            <div class="col-75">
+                                <textarea id="content" name="content" placeholder="Write something.."
+                                    style="height:200px"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+                <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+                    <div class="container-fluid text-center">
+                        <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
+                    </div>
+                </footer>
+</body>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/tether.min.js"></script>
+<script>
+
+
+    // $('form').submit(function (e) {
+    //     e.preventDefault();
+    
+    // });
+    
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        //console.log(searchDonorObj);
+        // #AvailableDonors
+        //SearchDonors(searchDonorObj);
+        // $("#dk1").hide();
+        // $("#dk2").hide();
+            create_post();
+        // FireBaseSearchDonors(searchDonorObj);
+    });
+    function create_post() {
+        var elements = document.getElementById("blog-post").elements;
+        var obj = {};
+        for (var i = 0; i < elements.length - 1; i++) {
+            var item = elements.item(i);
+            // key=item.name.replace(/^"(.+(?="$))"$/, '$1')
+            obj[item.name] = item.value;
+            // console.log(key,item.value);
+        }
+        var obj2={
+            title:obj["title"],
+            body:obj["content"],
+            city:obj["cities"],
+            state:obj["states"]
+        };
+        AddData(obj2);
+        alert("Added");
+        // location.reload();
+
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+        var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+            isClosed = false;
+
+        trigger.click(function () {
+            hamburger_cross();
+        });
+
+        function hamburger_cross() {
+
+            if (isClosed == true) {
+                overlay.hide();
+                trigger.removeClass('is-open');
+                trigger.addClass('is-closed');
+                isClosed = false;
+            } else {
+                overlay.show();
+                trigger.removeClass('is-closed');
+                trigger.addClass('is-open');
+                isClosed = true;
+            }
+        }
+
+        $('[data-toggle="offcanvas"]').click(function () {
+            $('#wrapper').toggleClass('toggled');
+        });
+
+
+
+
+    });
+</script>
+
+</html>

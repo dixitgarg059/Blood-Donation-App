@@ -69,18 +69,6 @@ $(document).ready(function () {
         $("#dk2").hide();
         FireBaseSearchDonors(searchDonorObj);
     });
-    $('#Campaign').on('submit', function (e) {
-        e.preventDefault();
-        //console.log(searchDonorObj);
-        // #AvailableDonors
-        //SearchDonors(searchDonorObj);
-        // $("#dk1").hide();
-        // $("#dk2").hide();
-        // FireBaseSearchDonors(searchDonorObj);
-        FireBaseSearchCampaigns(searchDonorObj);    
-    });
-
-
 });
 
 /*

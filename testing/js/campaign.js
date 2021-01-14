@@ -8,9 +8,10 @@ $(document).ready(function () {
         $('.WebUser').css('display', 'block');
         $('.MobileUser').css('display', 'none');
     }
+
     class Campaign {
         constructor() {
-            this. = {
+            this.Details = {
                 State: '',
                 City: '',
                 Data: ''
