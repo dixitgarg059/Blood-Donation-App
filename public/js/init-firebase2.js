@@ -16,14 +16,14 @@ var db = firebase.firestore();
 // var donorReferenceID = "0";
 
 function AddData(obj) {
-    
+
     alert("in add data");
 
-    var obj1={
-        title:"fdnkd",
-        state:"fndsjkfda",
-        city:"fdnjk",
-        content:"fjkdfn"
+    var obj1 = {
+        title: "fdnkd",
+        state: "fndsjkfda",
+        city: "fdnjk",
+        content: "fjkdfn"
     };
     db.collection("activities").add(obj)
         .then(function (docRef) {
@@ -70,11 +70,11 @@ function FireBaseSearchCampaigns(donor) {
     //console.log('details:', donor.donorDetails.State, donor.donorDetails.City, donor.donorDetails.BloodGroup);
     // console.log(donor.donorDetails.State,donor.donorDetails.City);
     // return ;
-    var State=donor.donorDetails.State+'';
-    var City= donor.donorDetails.City+'';
+    var State = donor.donorDetails.State + '';
+    var City = donor.donorDetails.City + '';
     let query = db.collection('activities')
         .where("state", "==", State)
-        .where('city', '==',City) ;
+        .where('city', '==', City);
     let index = 0;
     query.get()
         .then(snapshot => {
@@ -88,29 +88,18 @@ function FireBaseSearchCampaigns(donor) {
                 $('noCampaignsFound').css('display', 'none');
                 $('#CampaignTable tbody').empty();
                 snapshot.forEach(function (doc) {
-                    // console.log(doc.data().state == donor.donorDetails.State);
-                    // console.log(doc.data().city == donor.donorDetails.City);
-                    
-                    var flag = true
-                    var table = '#CampaignTable > tbody:last-child'
-                    $(table).append(
-                        `<tr><td class="width:90%">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4 py-1">
-                                                <b>Title: </b>#${doc.data().title}
-                                            </div>
-                                            <div class="col-md-5 py-1">
-                                                <b>Location: </b>${state_arr[doc.data().state]}, ${city_arr[doc.data().state].split("|")[doc.data().city]}
-                                            </div>
-                                            <div class="col-md-3 py-1">
-                                                <b>Content: </b>${doc.data().body}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </td></tr>`);
+
+                    $("#add_activities").append(
+                        `<div class = "card">
+                        <h2><b> ${doc.data().title} </b>    <h2>
+                        <h5> <b>Location: </b>${state_arr[doc.data().state]}, ${city_arr[doc.data().state].split("|")[doc.data().city]}</h5>
+                        <div class="fakeimg">
+                            <img src="https://www.aipiftsap.org/pages/activities/Images/WhatsApp%20Image%202020-06-28%20at%209.41.36%20AM.jpeg" >
+                        </div>
+                        <p>${doc.data().body}<p>
+                        </div>
+                        `
+                    );
                 });
             }
             $('#searchFormLoading').css('display', 'none');
