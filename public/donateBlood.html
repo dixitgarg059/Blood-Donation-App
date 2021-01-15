@@ -39,6 +39,68 @@
             padding: 0px;
             margin: 0px;
         }
+
+
+
+        .dropbtn {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 1px;
+            margin-left: 10px;
+            /* height:15px; */
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: blue;
+        }
+
+        .logout {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border:none;
+            width:100%;
+        }
+
+        .logout:hover {
+            background-color: #ddd;
+
+        }
     </style>
 </head>
 
@@ -88,7 +150,8 @@
                     <a class="navbar-brand" style="color: #000;" href="./searchDonors.html">
                         <img style="width: 120px; height: 120px;" src="./assets/logo.png" alt="logo">
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon fa fa-bars"></span>
                     </button>
@@ -116,10 +179,17 @@
                                     <i class="fa fa-tint"></i>Activities</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="./add_post.html">
-                                    <i class="fa fa-tint"></i>Admin</a>
+                            <li class="dropdown">
+                                <button class="dropbtn" id="role"></button>
+                                <div class="dropdown-content">
+                                    <a href="./admin.html">Login</a>
+                                    <button class="logout">Logout</button>
+                                </div>
                             </li>
+
+
+
+
                         </ul>
                     </div>
                 </nav>
@@ -145,7 +215,8 @@
                         <div class="col-md-9 register-right">
                             <div id="container" class=" text-center">
                                 <div id="loading" style="margin-top: 12%">
-                                    <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
+                                    <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif"
+                                        alt="logo">
                                 </div>
                                 <div id="loaded" class="hidden">
                                     <div id="main">
@@ -167,9 +238,11 @@
 
                             <div class="tab-content" id="myTabContent">
                                 <div class="col loading text-center" id="registerFormLoading">
-                                    <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
+                                    <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif"
+                                        alt="logo">
                                 </div>
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
                                     <h3 class="register-heading">Donor Registration</h3>
                                     <div class="row register-form" id="register-donor">
                                         <!--<fieldset>-->
@@ -177,13 +250,17 @@
                                             <div class="row ">
                                                 <div class="col-md-4 form-group">
                                                     <label for="donorName">Name:</label>
-                                                    <input class="form-control" id="donorName" placeholder="Enter your Name">
-                                                    <small class="text-danger" id="snackbarName">Name should be minimum 5 characters</small>
+                                                    <input class="form-control" id="donorName"
+                                                        placeholder="Enter your Name">
+                                                    <small class="text-danger" id="snackbarName">Name should be minimum
+                                                        5 characters</small>
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label for="donorContactNo">Contact Number:</label>
-                                                    <input class="form-control" type="text" id="donorContactNo" placeholder="Enter your Contact No">
-                                                    <small class="text-danger" id="snackbarMb">Mobile number should be min 5 digits</small>
+                                                    <input class="form-control" type="text" id="donorContactNo"
+                                                        placeholder="Enter your Contact No">
+                                                    <small class="text-danger" id="snackbarMb">Mobile number should be
+                                                        min 5 digits</small>
                                                 </div>
                                                 <!-- <div class="col-md-4">
                                             <label for="donorEmail">Enter your Email:</label>
@@ -194,7 +271,8 @@
                                                 <div class="col-md-4 form-group">
                                                     <label for="states">Select Your State:</label>
                                                     <select id="states" name="states" class="form-control"></select>
-                                                    <small class="text-danger" id="snackbarState">Please select state</small>
+                                                    <small class="text-danger" id="snackbarState">Please select
+                                                        state</small>
                                                 </div>
                                             </div>
                                             <div class="row ">
@@ -202,7 +280,8 @@
                                                 <div class="col-md-4 form-group">
                                                     <label for="cities">Select Your City:</label>
                                                     <select id="cities" name="cities" class="form-control"></select>
-                                                    <small class="text-danger" id="snackbarCity">Please select City</small>
+                                                    <small class="text-danger" id="snackbarCity">Please select
+                                                        City</small>
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label for="bloodGroup">Select Your Blood Group:</label>
@@ -217,7 +296,8 @@
                                                         <option value="AB-">AB-</option>
                                                         <option value="O-">O-</option>
                                                     </select>
-                                                    <small class="text-danger" id="snackbarbG">Please select blood group</small>
+                                                    <small class="text-danger" id="snackbarbG">Please select blood
+                                                        group</small>
                                                 </div>
                                             </div>
                                             <div>
@@ -226,7 +306,9 @@
                                                 <div class="row">
                                                     <div class="col-md-4 form-group">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                                            <input class="form-check-input" type="radio"
+                                                                name="gridRadios" id="gridRadios1" value="option1"
+                                                                checked>
                                                             <label class="form-check-label" for="gridRadios1">
                                                                 Never Donated
                                                             </label>
@@ -234,19 +316,25 @@
                                                     </div>
                                                     <div class="col-md-4 form-group">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Last Donated Blood on">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="gridRadios" id="gridRadios2"
+                                                                value="Last Donated Blood on">
                                                             <label class="form-check-label" for="gridRadios2">
                                                                 Last Donated Blood on:
                                                             </label>
-                                                            <input class="form-control" id="donationOn" type="date" name="donationOn" aria-describedby="emailHelp" placeholder="(YYYY-MM-DD)Provide date on which you donated blood last time"
+                                                            <input class="form-control" id="donationOn" type="date"
+                                                                name="donationOn" aria-describedby="emailHelp"
+                                                                placeholder="(YYYY-MM-DD)Provide date on which you donated blood last time"
                                                                 disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 form-group">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="gridRadios" id="gridRadios3" value="option3">
                                                             <label class="form-check-label" for="gridRadios3">
-                                                                You Wish Not to Donate Blood<cite><br>(Your details will not be shown in search results)</cite>
+                                                                You Wish Not to Donate Blood<cite><br>(Your details will
+                                                                    not be shown in search results)</cite>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -254,15 +342,17 @@
                                                 <div class=" form-group">
                                                     <button id="register" type="submit" class="btn btn-primary mt-2">
                                                         Register</button>
-                                                    <div class="col-md-12" id="snackbarDonateDetails">Your Blood Donation Details
+                                                    <div class="col-md-12" id="snackbarDonateDetails">Your Blood
+                                                        Donation Details
                                                     </div>
                                                     <div id="registerLoading" style="display: none;">
-                                                        <img style="width: 50%; height: 50%; position: relative; left: 20%; top: 50%;" src="./assets/images/loading.gif" alt="logo">
+                                                        <img style="width: 50%; height: 50%; position: relative; left: 20%; top: 50%;"
+                                                            src="./assets/images/loading.gif" alt="logo">
                                                     </div>
-                                                    <div id="unavailableError">Some Unexpecter error occured, Please refresh!!</div>
+                                                    <div id="unavailableError">Some Unexpecter error occured, Please
+                                                        refresh!!</div>
                                                 </div>
                                         </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -270,18 +360,36 @@
                     </div>
                 </div>
             </div>
-            <footer id="" class="py-4 bg-dark text-white-50">
-                <div class="container-fluid text-center">
-                    <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
-                </div>
-            </footer>
+        </div>
+        <footer id="" class="py-4 bg-dark text-white-50">
+            <div class="container-fluid text-center">
+                <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
+            </div>
+        </footer>
 </body>
 <script src="./js/jquery.js"></script>
 <script src="./js/bootstrap.js"></script>
 <script src="./js/popper.min.js"></script>
 <script src="./js/tether.min.js"></script>
 <script>
+
+    $(".logout").click(function () {
+        // event.preventDefault();
+        localStorage["login"] = "false";
+        localStorage["role"] = "Guest";
+        
+        // alert("Logged out");
+        document.getElementById("role").innerHTML="Guest";
+
+    });
+
+
     $(document).ready(function () {
+
+        if("role" in localStorage)
+            document.getElementById("role").innerHTML=localStorage["role"];
+        else
+            document.getElementById("role").innerHTML="Guest";
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;

@@ -15,9 +15,13 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 // var donorReferenceID = "0";
 
+
+var Done = false;
+var ValidUser = false;
+
 function AddData(obj) {
 
-    alert("in add data");
+    // alert("in add data");
 
     var obj1 = {
         title: "fdnkd",
@@ -27,13 +31,47 @@ function AddData(obj) {
     };
     db.collection("activities").add(obj)
         .then(function (docRef) {
+            alert("added");
             console.log("Document written with ID: ", docRef.id);
+            added = true;
+            window.location="./campaign.html";
         })
         .catch(function (error) {
             console.error("Error adding document: ", error);
+            added = true;
         });
 }
 
+
+// async function ValidateUser(Username, Password) {
+//     Username=Username + '';
+//     Password=Password+'';
+//     console.log(Username,Password);
+//     Done=false;
+//     ValidUser=false;
+//     var docRef = db.collection("activities").doc("Admin");
+//     var flg=false;
+//     await docRef.get().then(function (doc) {
+//         if (doc.exists) {
+//             console.log("Document data:", doc.data());
+//             if (doc.data().Username == Username && doc.data().Password == Password)
+//             {
+//                 ValidUser=true;
+//                 Done=true;
+//                 console.log("yes");
+//                 // return 10;
+//             }
+//             else
+//                 Done=true;
+
+
+//         } 
+//     }).catch(function (error) {
+//         Done=true;
+//         console.log("Error getting document:", error);
+//     });
+
+// }
 // function getData()
 // {
 //     var docRef = db.collection("users").doc("LA");

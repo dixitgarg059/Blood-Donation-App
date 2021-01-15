@@ -11,6 +11,68 @@
     <link rel="stylesheet" href="./css/style.css">
     <link type="text/css" rel="stylesheet" href="./css/firebase-ui.css" />
     <link type="text/css" rel="stylesheet" href="./css/font-awesome.min.css" />
+    <style>
+        .dropbtn {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 1px;
+            margin-left: 10px;
+            /* height:15px; */
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: blue;
+        }
+
+        .logout {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border:none;
+            width:100%;
+        }
+
+        .logout:hover {
+            background-color: #ddd;
+
+        }
+        
+    </style>
 </head>
 
 
@@ -90,17 +152,28 @@
                                     <i class="fa fa-tint"></i>Activities</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="./add_post.html">
-                                    <i class="fa fa-tint"></i>Admin</a>
+                            <li class="dropdown">
+                                <button class="dropbtn" id ="role"></button>
+                                <div class="dropdown-content">
+                                    <a href="./admin.html">Login</a>
+                                    <button class="logout">Logout</button>
+                                </div>
                             </li>
+
+
+
+
                         </ul>
                     </div>
+                    <!-- <div id="role">
+                        Guest
+                    </div> -->
 
 
 
 
                 </nav>
+                
                 <div class="container-fluid pt-3">
                     <div class="col loading text-center" id="searchFormLoading" style="display: none;">
                         <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
@@ -149,11 +222,11 @@
                         <h5 class="white" style="color: #fff" id="dk2">
                             Less than 5 months
                         </h5>
-                        
+
                         <table id="DonorsTable2" style="display: none;">
                             <tbody>
                                 <tr></tr>
-                            </tbody>    
+                            </tbody>
                         </table>
                         <div id='noDonorsFound' style="text-align: center;
                         font-size: 29px;
@@ -189,10 +262,23 @@
 <script src="./js/popper.min.js"></script>
 <script src="./js/tether.min.js"></script>
 <script>
+
     $("#dk1").hide();
     $("#dk2").hide();
+    $(".logout").click(function () {
+        // event.preventDefault();
+        localStorage["login"] = "false";
+        localStorage["role"]="Guest";
+        // alert("Logged out");
+        document.getElementById("role").innerHTML="Guest";
+
+    });
     $(document).ready(function () {
 
+        if("role" in localStorage)
+            document.getElementById("role").innerHTML=localStorage["role"];
+        else
+            document.getElementById("role").innerHTML="Guest";
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;

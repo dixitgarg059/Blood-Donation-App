@@ -44,9 +44,9 @@
         .fakeimg {
             /* /* background-color: #aaa; */
             /* width: 40%; */
-            padding: 20px; 
+            padding: 20px;
             height: 400px;
-            width: 100%;    
+            width: 100%;
         }
 
         /* Add a card effect for articles */
@@ -84,6 +84,66 @@
                 width: 100%;
                 padding: 0;
             }
+        }
+
+        .dropbtn {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 1px;
+            margin-left: 10px;
+            /* height:15px; */
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: blue;
+        }
+
+        .logout {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border:none;
+            width:100%;
+        }
+
+        .logout:hover {
+            background-color: #ddd;
+
         }
     </style>
 </head>
@@ -169,10 +229,20 @@
                                     <i class="fa fa-tint"></i>Activities</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="./add_post.html">
-                                    <i class="fa fa-tint"></i>Admin</a>
+
+                            <li class="dropdown">
+                                <button class="dropbtn" id="role"></button>
+                                <div class="dropdown-content">
+                                    <a href="./admin.html">Login</a>
+                                    <button class="logout">Logout</button>
+                                </div>
                             </li>
+
+
+
+
+
+
                         </ul>
                     </div>
                 </nav>
@@ -195,6 +265,11 @@
                             <div class="col-md-3 form-group">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary" id="add-post">
+                                    Add Activity
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -250,8 +325,46 @@
 <script src="./js/searchDonor.js"></script>
 
 <script>
+
+    $(".logout").click(function () {
+        // event.preventDefault();
+        localStorage["login"] = "false";
+        localStorage["role"] = "Guest";
+        
+        // alert("Logged out");
+        document.getElementById("role").innerHTML="Guest";
+
+    });
+
+
+    $("#add-post").click(function () {
+        // event.preventDefault();
+        if("role" in localStorage && localStorage["role"] == "Admin")
+        {
+            window.location="./add_post.html";
+
+        }
+        else
+        {
+            alert("You are not Logged in");
+        }
+
+        // localStorage["login"] = "false";
+        // localStorage["role"] = "Guest";
+        
+        // // alert("Logged out");
+        // document.getElementById("role").innerHTML="Guest";
+
+    });
+
+
     $(document).ready(function () {
 
+
+        if("role" in localStorage)
+            document.getElementById("role").innerHTML=localStorage["role"];
+        else
+            document.getElementById("role").innerHTML="Guest";
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;
