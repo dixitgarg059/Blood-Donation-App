@@ -19,6 +19,8 @@ function FireBaseSearchDonors(donor) {
     // document.getElementById('searchFormLoading').style.display = 'block';
     $('#searchFormLoading').css('display', 'block');
     $('#unavailableError').css('display', 'none');
+    $("#dk1").hide();
+    $("#dk2").hide();
     //console.log("searching donors....");
     //console.log('details:', donor.donorDetails.State, donor.donorDetails.City, donor.donorDetails.BloodGroup);
     let query = db.collection('Donors')
@@ -31,56 +33,99 @@ function FireBaseSearchDonors(donor) {
             //console.log('total data', snapshot.docs.length);
             if (snapshot.docs.length <= 0) {
                 $('#DonorsTable').css('display', 'none');
+                $('#DonorsTable2').css('display', 'none');
                 $('#noDonorsFound').css('display', 'block');
             } else {
                 $('#DonorsTable').css('display', 'block');
+                $('#DonorsTable2').css('display', 'block');
                 $('#noDonorsFound').css('display', 'none');
                 $('#DonorsTable tbody').empty();
                 snapshot.forEach(function (doc) {
                     //console.log(doc.id, '=>', doc.data());
                     //console.log(doc.data().LastDonatedDate);
-                    if (doc.data().DontDonate != true) {
+                    // var diff=
+                    // alert(doc.data().DontDonate)
+                    
+                    if(doc.data().DontDonate !=true)
+                    {
                         
-
+                        var flag=true
+                        var table='#DonorsTable > tbody:last-child'
                         if(doc.data().BloodDonationOption != 'NeverDonated')
                         {
-                            var cur_date=new Date();
-                            var last_donate
-
-                        }
-                        const date1 = new Date('7/13/2010');
-                        const date2 = new Date('12/15/2010');
-                        const diffTime = Math.abs(date2 - date1);
-                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                        console.log(diffTime + " milliseconds");
-                        console.log(diffDays + " days");
-                        $('#DonorsTable > tbody:last-child').append(
-                            `<tr><td class="width:75%">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4 py-1">
-                                            <b>Donor No: </b>#${++index}
-                                            <br>
-                                            <b>Donor Name: </b>${doc.data().DonorName}
-                                        </div>
-                                        <div class="col-md-5 py-1">
-                                           <!--<b>Email: </b>${doc.data().Email} -->
-                                            <b>Contact No: </b>${doc.data().ContactNo}
-                                            <br>
-                                            <b>Location: </b>${ state_arr[doc.data().State]}, ${city_arr[doc.data().State].split("|")[doc.data().City] }
-                                        </div>
-                                        <div class="col-md-3 py-1">
-                                            <div class="blood-style">
-                                            <b>Blood Group: </b>${doc.data().BloodGroup}
+                            var current_date=new Date();
+                            var last_donated_date=new Date((doc.data().LastDonatedDate));
+                            months = (current_date.getFullYear() - last_donated_date.getFullYear()) * 12;
+                            months -= last_donated_date.getMonth();
+                            months += current_date.getMonth();
+                            if(months < 5)
+                            {
+                                table='#DonorsTable2 > tbody:last-child';
+                                $("#dk2").show()
+                            }
+                            else
+                                $("#dk1").show()
+                            $(table).append(
+                                `<tr><td class="width:90%">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4 py-1">
+                                                <b>Donor No: </b>#${++index}
+                                                <br>
+                                                <b>Donor Name: </b>${doc.data().DonorName}
                                             </div>
-                                            <!--<b>Available: </b>mol<br>-->
-                                            <b>Last Donated on: </b>${doc.data().BloodDonationOption == 'NeverDonated'? 'NeverDonated': doc.data().LastDonatedDate == '1900-01-01' ? 'Never Donated' : new Date((doc.data().LastDonatedDate)).toDateString()} 
+                                            <div class="col-md-5 py-1">
+                                            <!--<b>Email: </b>${doc.data().Email} -->
+                                                <b>Contact No: </b><a href="tel:1800123456">${doc.data().ContactNo}</a>
+                                                <br>
+                                                <b>Location: </b>${ state_arr[doc.data().State]}, ${city_arr[doc.data().State].split("|")[doc.data().City] }
+                                            </div>
+                                            <div class="col-md-3 py-1">
+                                                <div class="blood-style">
+                                                <b>Blood Group: </b>${doc.data().BloodGroup}
+                                                </div>
+                                                <!--<b>Available: </b>mol<br>-->
+                                                <b>Last Donated on: </b>${doc.data().BloodDonationOption == 'NeverDonated'? 'NeverDonated': doc.data().LastDonatedDate == '1900-01-01' ? 'Never Donated' : new Date((doc.data().LastDonatedDate)).toDateString()} 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            </td></tr>`);
+                                </td></tr>`);
+                        }
+                        else
+                        {
+                            $("#dk1").show()
+                            $(table).append(
+                                `<tr><td class="width:75%">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4 py-1">
+                                                <b>Donor No: </b>#${++index}
+                                                <br>
+                                                <b>Donor Name: </b>${doc.data().DonorName}
+                                            </div>
+                                            <div class="col-md-5 py-1">
+                                            <!--<b>Email: </b>${doc.data().Email} -->
+                                                <b>Contact No: </b><a href="tel:1800123456">${doc.data().ContactNo}</a>
+                                                <br>
+                                                <b>Location: </b>${ state_arr[doc.data().State]}, ${city_arr[doc.data().State].split("|")[doc.data().City] }
+                                            </div>
+                                            <div class="col-md-3 py-1">
+                                                <div class="blood-style">
+                                                <b>Blood Group: </b>${doc.data().BloodGroup}
+                                                </div>
+                                                <!--<b>Available: </b>mol<br>-->
+                                                <b>Last Donated on: </b>${doc.data().BloodDonationOption == 'NeverDonated'? 'NeverDonated': doc.data().LastDonatedDate == '1900-01-01' ? 'Never Donated' : new Date((doc.data().LastDonatedDate)).toDateString()} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </td></tr>`
+                            );
+                        }        
+                    
                     }
                 });
             }
