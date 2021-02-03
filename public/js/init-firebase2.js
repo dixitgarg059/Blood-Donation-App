@@ -122,18 +122,40 @@ function FireBaseSearchCampaigns(donor) {
                 $('noCampaignsFound').css('display', 'none');
                 $('#CampaignTable tbody').empty();
                 snapshot.forEach(function (doc) {
-
-                    $("#add_activities").append(
-                        `<div class = "card">
-                        <h2><b> ${doc.data().title} </b>    <h2>
-                        <h5> <b>Location: </b>${state_arr[doc.data().state]}, ${city_arr[doc.data().state].split("|")[doc.data().city]}</h5>
-                        <div class="fakeimg">
-                            <img src="https://www.aipiftsap.org/pages/activities/Images/WhatsApp%20Image%202020-06-28%20at%209.41.36%20AM.jpeg" >
-                        </div>
-                        <p>${doc.data().body}<p>
-                        </div>
-                        `
-                    );
+                    Name="images/" + doc.id + ".jpeg";
+                    var storage=firebase.storage();
+                    var Ref=storage.ref(Name);
+                    Ref.getDownloadURL()
+                    .then((url) => {
+                        // `url` is the download URL for 'images/stars.jpg'
+                    
+                        // // This can be downloaded directly:
+                        // var xhr = new XMLHttpRequest();
+                        // xhr.responseType = 'blob';
+                        // xhr.onload = (event) => {
+                        //   var blob = xhr.response;
+                        // };
+                        // xhr.open('GET', url);
+                        // xhr.send();
+                    
+                        $("#add_activities").append(
+                            `<div class = "card">
+                            <h2><b> ${doc.data().title} </b>    <h2>
+                            <h5> <b>Location: </b>${state_arr[doc.data().state]}, ${city_arr[doc.data().state].split("|")[doc.data().city]}</h5>
+                            <div class="fakeimg">
+                                <img src=${url} >
+                            </div>
+                            <p>${doc.data().body}<p>
+                            </div>
+                            `
+                        );
+                        // Or inserted into an <img> element
+                        var img = document.getElementById('myimg');
+                        img.setAttribute('src', url);
+                      })
+                      .catch((error) => {
+                        // Handle any errors
+                      });
                 });
             }
             $('#searchFormLoading').css('display', 'none');
