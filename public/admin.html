@@ -355,12 +355,38 @@
         var Password = obj["psw"];
 
 
-        if (Username == "dixit" && Password == "123456") {
-            localStorage.setItem("login", "true");
-            localStorage.setItem("role","Admin");
-            // localStorage["login"]=  true;
-            window.location = "./index.html";
-        }
+        ValidateUser(Username,Password).then(function(value){
+
+            if(value)
+            {
+                console.log(value);
+                console.log("Logged in ");
+                localStorage.setItem("login", "true");
+                localStorage.setItem("role","Admin");
+                localStorage["login"]=  true;
+                window.location = "./index.html";
+            }
+        })
+
+        // console.log(result) ;
+        // if(result)
+        // {
+
+        //     console.log("Logged in ");
+        // //    localStorage.setItem("login", "true");
+        // // //     localStorage.setItem("role","Admin");
+        // // //     // localStorage["login"]=  true;
+        // // //     window.location = "./index.html";
+        // }
+
+
+        // if (Username == "dixit" && Password == "123456") {
+        //     localStorage.setItem("login", "true");
+        //     localStorage.setItem("role","Admin");
+        //     // localStorage["login"]=  true;
+        //     window.location = "./index.html";
+        // }
+        
         // ValidateUser(Username,Password).then(
 
 

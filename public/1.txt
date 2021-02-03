@@ -1,0 +1,21 @@
+You are given an integer array.Find the smallest group of size > 3 under multiplication modulo M.If no such group exists,print -1.
+
+constraints:   
+
+1 <= N <= 1e5 
+
+M = 1e9+7
+
+1<= a[i] <= 1e9
+
+
+
+You are given a Group G under multiplication modulo M containing N elements.Find the smallest subgroup of size > 3.
+
+constraints:   
+
+1 <= N <= 1e5 
+
+M = 1e9+7
+
+1<= G[i] <= 1e9
