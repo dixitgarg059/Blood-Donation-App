@@ -20,6 +20,7 @@
     <script src="./js/firebaseui.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/init-firebase2.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-storage.js"></script>
 
 
 
@@ -185,8 +186,8 @@
             text-align: left;
             text-decoration: none;
             display: block;
-            border:none;
-            width:100%;
+            border: none;
+            width: 100%;
         }
 
         .logout:hover {
@@ -329,6 +330,11 @@
                             </div>
                         </div>
                         <div class="row">
+                        </div>
+                        <input type="file" onchange="previewFile()">
+                        <img src="" height="200" alt="Image preview..." id="show_preview"/>
+
+                        <div class="row">
                             <input type="submit" value="Submit">
                         </div>
                     </form>
@@ -350,9 +356,28 @@
         localStorage["login"] = "false";
         localStorage["role"] = "Guest";
         // alert("Logged out");
-        document.getElementById("role").innerHTML="Guest";
+        document.getElementById("role").innerHTML = "Guest";
 
     });
+
+    let Image;
+    function previewFile() {
+        var preview = document.getElementById('show_preview');
+        var file = document.querySelector('input[type=file]').files[0];
+
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+            Image=file;
+        } else {
+            preview.src = "";
+        }
+    }
 
 
 
@@ -368,7 +393,22 @@
         //SearchDonors(searchDonorObj);
         // $("#dk1").hide();
         // $("#dk2").hide();
+
+
+        
         create_post();
+        // upload_file(Image, "example.jpg");
+        // let storageRef = firebase.storage().ref('photos/myPictureName')
+
+        // fileUpload.addEventListener('change', function(evt) {
+        //     let firstFile = evt.target.files[0] // upload the first file only
+        //     let uploadTask = storageRef.put(firstFile)
+        // })
+
+
+
+
+
         // FireBaseSearchDonors(searchDonorObj);
     });
     function create_post() {
@@ -386,7 +426,12 @@
             city: obj["cities"],
             state: obj["states"]
         };
-        AddData(obj2);
+        AddData(obj2).then(function(Id){
+            Image_name=Id + ".jpeg"
+            upload_file(Image,Image_name).then(function(){
+                window.location="./campaign.html";
+            })
+        })
         // alert("Added");
         // window.location="./campaign.html";
         // $('form')[0].reset()
@@ -398,10 +443,10 @@
 <script>
     $(document).ready(function () {
 
-        if("role" in localStorage)
-            document.getElementById("role").innerHTML=localStorage["role"];
+        if ("role" in localStorage)
+            document.getElementById("role").innerHTML = localStorage["role"];
         else
-            document.getElementById("role").innerHTML="Guest";
+            document.getElementById("role").innerHTML = "Guest";
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;
