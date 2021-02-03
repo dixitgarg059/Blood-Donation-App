@@ -43,35 +43,27 @@ function AddData(obj) {
 }
 
 
-// async function ValidateUser(Username, Password) {
-//     Username=Username + '';
-//     Password=Password+'';
-//     console.log(Username,Password);
-//     Done=false;
-//     ValidUser=false;
-//     var docRef = db.collection("activities").doc("Admin");
-//     var flg=false;
-//     await docRef.get().then(function (doc) {
-//         if (doc.exists) {
-//             console.log("Document data:", doc.data());
-//             if (doc.data().Username == Username && doc.data().Password == Password)
-//             {
-//                 ValidUser=true;
-//                 Done=true;
-//                 console.log("yes");
-//                 // return 10;
-//             }
-//             else
-//                 Done=true;
+async function ValidateUser(Username, Password) {
+    Username=Username + '';
+    Password=Password+'';
+    console.log(Username,Password);
+    var ValidUser=false;
 
-
-//         } 
-//     }).catch(function (error) {
-//         Done=true;
-//         console.log("Error getting document:", error);
-//     });
-
-// }
+    var docRef = db.collection("activities").doc("Admin");
+    var doc=await docRef.get();
+    if (doc.exists) {
+        console.log("Document data:", doc.data());
+        if (doc.data().Username == Username && doc.data().Password == Password)
+        {
+            ValidUser=true;
+            console.log("yes");
+        }
+        else
+            ValidUser=false;
+    }
+    console.log(ValidUser);
+    return ValidUser;
+}
 // function getData()
 // {
 //     var docRef = db.collection("users").doc("LA");
