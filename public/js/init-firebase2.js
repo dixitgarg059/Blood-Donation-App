@@ -13,13 +13,14 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 //   firebase.analytics();
 var db = firebase.firestore();
+
 // var donorReferenceID = "0";
 
 
 var Done = false;
 var ValidUser = false;
 
-function AddData(obj) {
+async function AddData(obj) {
 
     // alert("in add data");
 
@@ -29,17 +30,9 @@ function AddData(obj) {
         city: "fdnjk",
         content: "fjkdfn"
     };
-    db.collection("activities").add(obj)
-        .then(function (docRef) {
-            alert("added");
-            console.log("Document written with ID: ", docRef.id);
-            added = true;
-            window.location="./campaign.html";
-        })
-        .catch(function (error) {
-            console.error("Error adding document: ", error);
-            added = true;
-        });
+    var doc=await db.collection("activities").add(obj);
+    console.log("document written with id : ",doc.id);
+    return doc.id;
 }
 
 
@@ -63,6 +56,17 @@ async function ValidateUser(Username, Password) {
     }
     console.log(ValidUser);
     return ValidUser;
+}
+
+async function upload_file(fileUpload,Name)
+{
+
+    var storage = firebase.storage();
+    var image_ref=storage.ref().child('images' + "/" + Name)
+    await image_ref.put(fileUpload);
+    console.log("Image uploaded");
+    alert("Added");
+    
 }
 // function getData()
 // {

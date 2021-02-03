@@ -55,7 +55,7 @@ $(document).ready(function () {
         // $("#dk1").hide();
         // $("#dk2").hide();
         FireBaseSearchCampaigns(Obj);
-        alert("hello")
+        // alert("hello")/*  */
     });
 });
 
