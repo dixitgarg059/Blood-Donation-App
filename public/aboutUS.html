@@ -62,11 +62,27 @@
             text-align: left;
             text-decoration: none;
             display: block;
-            border:none;
-            width:100%;
+            border: none;
+            width: 100%;
         }
 
         .logout:hover {
+            background-color: #ddd;
+
+        }
+
+        .login {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border: none;
+            width: 100%;
+        }
+
+        .login:hover {
             background-color: #ddd;
 
         }
@@ -101,6 +117,19 @@
                     <a href="./donateBlood.html">
                         <i class="fa fa-tint"></i> Donate Blood</a>
                 </li>
+                <li>
+                    <a href="./campaign.html">
+                        Activities</a>
+                </li>
+
+                <li class="dropdown">
+                    <button class="dropbtn" id="role" style="background-color: transparent;"> </button>
+                    <div class="dropdown-content">
+                        <button class="login">Login</button>
+                        <button class="logout">Logout</button>
+                    </div>
+                </li>
+
 
             </ul>
         </nav>
@@ -141,25 +170,20 @@
                                     <i class="fa fa-search"></i> Search Blood Donors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./donateBlood.html">
+                                <a class="nav-link text-dark" href="./donateBlood.html">
                                     <i class="fa fa-tint"></i> Donate Blood</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./campaign.html">
-                                    <i class="fa fa-tint"></i>Activities</a>
+                                <a class = "nav-link text-dark" href="./campaign.html" style="background-color:transparent">
+                                Activities</a>
                             </li>
-
-                            <li class="dropdown">
-                                <button class="dropbtn" id="role"> </button>
+                            <!-- <li class="dropdown">
+                                <button class="dropbtn" id ="role">Error</button>
                                 <div class="dropdown-content">
-                                    <a href="./admin.html">Login</a>
+                                    <button class="login">Login</button>
                                     <button class="logout">Logout</button>
                                 </div>
-                            </li>
-
-
-
-
+                            </li> -->
                         </ul>
                     </div>
                 </nav>
@@ -347,20 +371,34 @@
 <script src="./js/tether.min.js"></script>
 <script>
 
+
+    $(".login").click(function(){
+
+        window.location="./admin.html";
+    })
     $(".logout").click(function () {
         // event.preventDefault();
         localStorage["login"] = "false";
         localStorage["role"] = "Guest";
-        document.getElementById("role").innerHTML="Guest";
+        document.getElementById("role").innerHTML = "Guest";
     });
 
 
     $(document).ready(function () {
 
-        if("role" in localStorage)
-            document.getElementById("role").innerHTML=localStorage["role"];
+        // document.getElementById("role").innerHTML="dfdn";
+
+        if ("role" in localStorage)
+        {
+            
+            document.getElementById("role").innerHTML = localStorage["role"];
+        }
         else
-            document.getElementById("role").innerHTML="Guest";
+        {
+            // alert("hello");
+            document.getElementById("role").innerHTML = "Guest";
+        }
+        
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;

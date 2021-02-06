@@ -64,15 +64,29 @@
             text-align: left;
             text-decoration: none;
             display: block;
-            border:none;
-            width:100%;
+            border: none;
+            width: 100%;
         }
 
         .logout:hover {
             background-color: #ddd;
 
         }
-        
+        .login {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border: none;
+            width: 100%;
+        }
+
+        .login:hover {
+            background-color: #ddd;
+
+        }
     </style>
 </head>
 
@@ -105,6 +119,18 @@
                     <a href="./donateBlood.html">
                         <i class="fa fa-tint"></i> Donate Blood</a>
                 </li>
+                <li>
+                    <a href="./campaign.html">
+                        Activities</a>
+                </li>
+
+                <li class="dropdown">
+                    <button class="dropbtn" id="role" style="background-color: transparent;"> </button>
+                    <div class="dropdown-content">
+                        <button class="login">Login</button>
+                        <button class="logout">Logout</button>
+                    </div>
+                </li>
 
             </ul>
         </nav>
@@ -122,7 +148,7 @@
 
                 <nav class="navbar navbar-expand-xl">
                     <a class="navbar-brand" style="color: #000;" href="./searchDonors.html">
-                        <img style="width: 100px; height: 100px;" src="./assets/logo.png" alt="logo">
+                        <img style="width: 120px; height: 120px;" src="./assets/logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
@@ -145,36 +171,24 @@
                                     <i class="fa fa-search"></i> Search Blood Donors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./donateBlood.html">
+                                <a class="nav-link text-dark" href="./donateBlood.html">
                                     <i class="fa fa-tint"></i> Donate Blood</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./campaign.html">
-                                    <i class="fa fa-tint"></i>Activities</a>
+                                <a class="nav-link text-dark" href="./campaign.html"
+                                    style="background-color:transparent">
+                                    Activities</a>
                             </li>
-
-                            <li class="dropdown">
-                                <button class="dropbtn" id ="role"></button>
+                            <!-- <li class="dropdown">
+                                <button class="dropbtn" id="role">Error</button>
                                 <div class="dropdown-content">
-                                    <a href="./admin.html">Login</a>
+                                    <button class="login">Login</button>
                                     <button class="logout">Logout</button>
                                 </div>
-                            </li>
-
-
-
-
+                            </li> -->
                         </ul>
                     </div>
-                    <!-- <div id="role">
-                        Guest
-                    </div> -->
-
-
-
-
                 </nav>
-                
                 <div class="container-fluid pt-3">
                     <div class="col loading text-center" id="searchFormLoading" style="display: none;">
                         <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
@@ -267,20 +281,24 @@
 
     $("#dk1").hide();
     $("#dk2").hide();
+    $(".login").click(function () {
+
+        window.location = "./admin.html";
+    })
     $(".logout").click(function () {
         // event.preventDefault();
         localStorage["login"] = "false";
-        localStorage["role"]="Guest";
+        localStorage["role"] = "Guest";
         // alert("Logged out");
-        document.getElementById("role").innerHTML="Guest";
+        document.getElementById("role").innerHTML = "Guest";
 
     });
     $(document).ready(function () {
 
-        if("role" in localStorage)
-            document.getElementById("role").innerHTML=localStorage["role"];
+        if ("role" in localStorage)
+            document.getElementById("role").innerHTML = localStorage["role"];
         else
-            document.getElementById("role").innerHTML="Guest";
+            document.getElementById("role").innerHTML = "Guest";
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;

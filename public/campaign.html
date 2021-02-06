@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link type="text/css" rel="stylesheet" href="./css/firebase-ui.css" />
     <link type="text/css" rel="stylesheet" href="./css/font-awesome.min.css" />
-  
+
     <style>
         body {
             font-family: Arial;
@@ -138,11 +138,26 @@
             text-align: left;
             text-decoration: none;
             display: block;
-            border:none;
-            width:100%;
+            border: none;
+            width: 100%;
         }
 
         .logout:hover {
+            background-color: #ddd;
+
+        }
+        .login {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border: none;
+            width: 100%;
+        }
+
+        .login:hover {
             background-color: #ddd;
 
         }
@@ -178,9 +193,17 @@
                     <a href="./donateBlood.html">
                         <i class="fa fa-tint"></i> Donate Blood</a>
                 </li>
-                <li class="nav-item">
+                <li>
                     <a href="./campaign.html">
-                        <i class="fa fa-tint"></i>Campaigns</a>
+                        Activities</a>
+                </li>
+
+                <li class="dropdown">
+                    <button class="dropbtn" id="role" style="background-color: transparent;"> </button>
+                    <div class="dropdown-content">
+                        <button class="login">Login</button>
+                        <button class="logout">Logout</button>
+                    </div>
                 </li>
 
             </ul>
@@ -199,7 +222,7 @@
 
                 <nav class="navbar navbar-expand-xl">
                     <a class="navbar-brand" style="color: #000;" href="./searchDonors.html">
-                        <img style="width: 100px; height: 100px;" src="./assets/logo.png" alt="logo">
+                        <img style="width: 120px; height: 120px;" src="./assets/logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
@@ -222,28 +245,21 @@
                                     <i class="fa fa-search"></i> Search Blood Donors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./donateBlood.html">
+                                <a class="nav-link text-dark" href="./donateBlood.html">
                                     <i class="fa fa-tint"></i> Donate Blood</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./campaign.html">
-                                    <i class="fa fa-tint"></i>Activities</a>
+                                <a class="nav-link text-dark" href="./campaign.html"
+                                    style="background-color:transparent">
+                                    Activities</a>
                             </li>
-
-
-                            <li class="dropdown">
-                                <button class="dropbtn" id="role"></button>
+                            <!-- <li class="dropdown">
+                                <button class="dropbtn" id="role">Error</button>
                                 <div class="dropdown-content">
-                                    <a href="./admin.html">Login</a>
+                                    <button class="login">Login</button>
                                     <button class="logout">Logout</button>
                                 </div>
-                            </li>
-                            
-
-
-
-
-
+                            </li> -->
                         </ul>
                     </div>
                 </nav>
@@ -297,17 +313,17 @@
     </div>
     <br>
     </br>
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-        <div class="container-fluid text-center">
+    <footer id="sticky-footer" style="background-color: black;color: white;width:100%">
+        <!-- <div class="container-fluid text-center"> -->
             <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
-        </div>
+        <!-- </div> -->
     </footer>
 </body>
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-storage.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-storage.js"></script> -->
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
@@ -328,32 +344,34 @@
 
 <script>
 
+    $(".login").click(function () {
+
+        window.location = "./admin.html";
+    })
     $(".logout").click(function () {
         // event.preventDefault();
         localStorage["login"] = "false";
         localStorage["role"] = "Guest";
-        
+
         // alert("Logged out");
-        document.getElementById("role").innerHTML="Guest";
+        document.getElementById("role").innerHTML = "Guest";
 
     });
 
 
     $("#add-post").click(function () {
         // event.preventDefault();
-        if("role" in localStorage && localStorage["role"] == "Admin")
-        {
-            window.location="./add_post.html";
+        if ("role" in localStorage && localStorage["role"] == "Admin") {
+            window.location = "./add_post.html";
 
         }
-        else
-        {
+        else {
             alert("You are not Logged in");
         }
 
         // localStorage["login"] = "false";
         // localStorage["role"] = "Guest";
-        
+
         // // alert("Logged out");
         // document.getElementById("role").innerHTML="Guest";
 
@@ -363,10 +381,10 @@
     $(document).ready(function () {
 
 
-        if("role" in localStorage)
-            document.getElementById("role").innerHTML=localStorage["role"];
+        if ("role" in localStorage)
+            document.getElementById("role").innerHTML = localStorage["role"];
         else
-            document.getElementById("role").innerHTML="Guest";
+            document.getElementById("role").innerHTML = "Guest";
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
             isClosed = false;

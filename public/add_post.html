@@ -180,12 +180,33 @@
         }
 
         .logout {
-            color: black;<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-storage.js"></script>
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
             border: none;
             width: 100%;
         }
 
         .logout:hover {
+            background-color: #ddd;
+
+        }
+
+        .login {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border: none;
+            width: 100%;
+        }
+
+        .login:hover {
             background-color: #ddd;
 
         }
@@ -221,9 +242,18 @@
                         <i class="fa fa-tint"></i> Donate Blood</a>
                 </li>
                 <li>
-                    <a href="./add_post.html">
-                        <i class="fa fa-tint"></i>Admin</a>
+                    <a href="./campaign.html">
+                        Activities</a>
                 </li>
+
+                <li class="dropdown">
+                    <button class="dropbtn" id="role" style="background-color: transparent;"> </button>
+                    <div class="dropdown-content">
+                        <button class="login">Login</button>
+                        <button class="logout">Logout</button>
+                    </div>
+                </li>
+
 
 
             </ul>
@@ -264,22 +294,22 @@
                                     <i class="fa fa-search"></i> Search Blood Donors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./donateBlood.html">
+                                <a class="nav-link text-dark" href="./donateBlood.html">
                                     <i class="fa fa-tint"></i> Donate Blood</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./campaign.html">
-                                    <i class="fa fa-tint"></i>Activities</a>
+                                <a class="nav-link text-dark" href="./campaign.html"
+                                    style="background-color:transparent">
+                                    Activities
+                                </a>
                             </li>
-
-                            <li class="dropdown">
-                                <button class="dropbtn" id="role"> </button>
+                            <!-- <li class="dropdown">
+                                <button class="dropbtn" id="role">Error</button>
                                 <div class="dropdown-content">
-                                    <a href="./admin.html">Login</a>
+                                    <button class="login">Login</button>
                                     <button class="logout">Logout</button>
                                 </div>
-                            </li>
-
+                            </li> -->
                         </ul>
                     </div>
                 </nav>
@@ -327,14 +357,14 @@
                         <div class="row">
                         </div>
                         <input type="file" onchange="previewFile()">
-                        <img src="" height="200" alt="Image preview..." id="show_preview"/>
+                        <!-- <img src="" height="200" alt="Image preview..." id="show_preview" /> -->
 
-                        <div class="row">
+                        <div class="row" style="margin-top: 10px;">
                             <input type="submit" value="Submit">
                         </div>
                     </form>
                 </div>
-                <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+                <footer class="py-4 bg-dark text-white-50" style="width: 100%;">
                     <div class="container-fluid text-center">
                         <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
                     </div>
@@ -345,6 +375,11 @@
 <script src="./js/jquery.js"></script>
 <script src="./js/tether.min.js"></script>
 <script>
+
+    $(".login").click(function () {
+
+        window.location = "./admin.html";
+    });
 
     $(".logout").click(function () {
         // event.preventDefault();
@@ -368,7 +403,7 @@
 
         if (file) {
             reader.readAsDataURL(file);
-            Image=file;
+            Image = file;
         } else {
             preview.src = "";
         }
@@ -390,7 +425,7 @@
         // $("#dk2").hide();
 
 
-        
+
         create_post();
         // upload_file(Image, "example.jpg");
         // let storageRef = firebase.storage().ref('photos/myPictureName')
@@ -421,10 +456,10 @@
             city: obj["cities"],
             state: obj["states"]
         };
-        AddData(obj2).then(function(Id){
-            Image_name=Id + ".jpeg"
-            upload_file(Image,Image_name).then(function(){
-                window.location="./campaign.html";
+        AddData(obj2).then(function (Id) {
+            Image_name = Id + ".jpeg"
+            upload_file(Image, Image_name).then(function () {
+                window.location = "./campaign.html";
             })
         })
         // alert("Added");

@@ -194,6 +194,21 @@
             background-color: #ddd;
 
         }
+        .login {
+            color: black;
+            background-color: #f1f1f1;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            border: none;
+            width: 100%;
+        }
+
+        .login:hover {
+            background-color: #ddd;
+
+        }
     </style>
 </head>
 
@@ -226,8 +241,16 @@
                         <i class="fa fa-tint"></i> Donate Blood</a>
                 </li>
                 <li>
-                    <a href="./add_post.html">
-                        <i class="fa fa-tint"></i>Admin</a>
+                    <a href="./campaign.html">
+                        Activities</a>
+                </li>
+
+                <li class="dropdown">
+                    <button class="dropbtn" id="role" style="background-color: transparent;"> </button>
+                    <div class="dropdown-content">
+                        <button class="login">Login</button>
+                        <button class="logout">Logout</button>
+                    </div>
                 </li>
 
 
@@ -269,23 +292,20 @@
                                     <i class="fa fa-search"></i> Search Blood Donors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./donateBlood.html">
+                                <a class="nav-link text-dark" href="./donateBlood.html">
                                     <i class="fa fa-tint"></i> Donate Blood</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="./campaign.html">
-                                    <i class="fa fa-tint"></i>Activities</a>
+                                <a class = "nav-link text-dark" href="./campaign.html" style="background-color:transparent">
+                                Activities</a>
                             </li>
-                            <li class="dropdown">
-                                <button class="dropbtn" id="role"></button>
+                            <!-- <li class="dropdown">
+                                <button class="dropbtn" id ="role">Error</button>
                                 <div class="dropdown-content">
-                                    <a href="./admin.html">Login</a>
+                                    <button class="login">Login</button>
                                     <button class="logout">Logout</button>
                                 </div>
-                            </li>
-
-
-
+                            </li> -->
                         </ul>
                     </div>
                 </nav>
@@ -319,6 +339,11 @@
 <script src="./js/tether.min.js"></script>
 <script>
 
+
+    $(".login").click(function(){
+
+    window.location="./admin.html";
+    })
     $(".logout").click(function () {
         // event.preventDefault();
         localStorage["login"]="false";
@@ -363,7 +388,6 @@
                 console.log("Logged in ");
                 localStorage.setItem("login", "true");
                 localStorage.setItem("role","Admin");
-                localStorage["login"]=  true;
                 window.location = "./index.html";
             }
         })
